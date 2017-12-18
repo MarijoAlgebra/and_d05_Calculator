@@ -38,46 +38,64 @@ public class MainActivity extends AppCompatActivity {
         bSum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getnumbers();
-                String result = prviBroj + "+" + drugiBroj + "=" + (prviBroj + drugiBroj);
-                setResult(result);
+                if (getnumbers()) {
+                    String result = prviBroj + "+" + drugiBroj + "=" + (prviBroj + drugiBroj);
+                    setResult(result);
+                }
             }
         });
 
         bSubtract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getnumbers();
-                String result = prviBroj + "-" + drugiBroj + "=" + (prviBroj - drugiBroj);
-                setResult(result);
+                if (getnumbers()) {
+                    String result = prviBroj + "-" + drugiBroj + "=" + (prviBroj - drugiBroj);
+                    setResult(result);
+                }
             }
         });
 
         bMultiply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getnumbers();
-                String result = prviBroj + "*" + drugiBroj + "=" + (prviBroj * drugiBroj);
-                setResult(result);
+                if (getnumbers()) {
+                    String result = prviBroj + "*" + drugiBroj + "=" + (prviBroj * drugiBroj);
+                    setResult(result);
+                }
             }
         });
 
         bDivide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getnumbers();
-                String result = prviBroj + "/" + drugiBroj + "=" + (prviBroj / drugiBroj);
-                setResult(result);
+                if (getnumbers()) {
+                    String result = prviBroj + "/" + drugiBroj + "=" + (prviBroj / drugiBroj);
+                    setResult(result);
+                }
             }
         });
     }
 
-    private void getnumbers() {
-        if (etPrviBroj.getText().toString().matches("")) prviBroj = 0.0;
-        else prviBroj = Double.valueOf(etPrviBroj.getText().toString());
+    private Boolean getnumbers() {
+        Boolean retVal;
 
-        if (etDrugiBroj.getText().toString().matches("")) drugiBroj = 0.0;
-        else drugiBroj = Double.valueOf(etDrugiBroj.getText().toString());
+        if (!etPrviBroj.getText().toString().trim().isEmpty()) {
+            prviBroj = Double.valueOf(etPrviBroj.getText().toString());
+            retVal = true;
+        } else {
+            etPrviBroj.setError("Unesi prvi broj!");
+            retVal = false;
+        }
+
+        if (retVal && !etDrugiBroj.getText().toString().trim().isEmpty()) {
+            drugiBroj = Double.valueOf(etDrugiBroj.getText().toString());
+            retVal = true;
+        } else {
+            etDrugiBroj.setError("Unesi drugi broj!");
+            retVal = false;
+        }
+
+        return retVal;
     }
 
     private void setResult(String result) {
